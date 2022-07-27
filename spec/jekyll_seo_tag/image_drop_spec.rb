@@ -3,13 +3,7 @@
 RSpec.describe Jekyll::SeoTag::ImageDrop do
   let(:config)    { { "title" => "site title" } }
   let(:image)     { nil }
-  let(:page_meta) do
-    {
-      "image" => image,
-      "dir"   => "foo",
-      "date"  => "2017-01-01"
-    }
-  end
+  let(:page_meta) { { "image" => image, "dir" => "foo" } }
   let(:page)      { make_page(page_meta) }
   let(:site)      { make_site(config) }
   let(:context)   { make_context(:page => page, :site => site) }
@@ -23,6 +17,7 @@ RSpec.describe Jekyll::SeoTag::ImageDrop do
   context "with a post object" do
     let(:image) { "image.png" }
     let(:page) { make_post(page_meta) }
+    let(:page_meta) { { "image" => image, "date" => "2017-01-01" } }
 
     it "returns the image url relative to the post directory" do
       expect(subject["path"]).to eql("/2017/01/01/image.png")
